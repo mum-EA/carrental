@@ -15,7 +15,6 @@ public class Car {
 	
 	private String model;
 	private String description;
-	private MultipartFile carImage;
 	public String getModel() {
 		return model;
 	}
@@ -36,12 +35,7 @@ public class Car {
 	public void setCarId(int carId) {
 		this.carId = carId;
 	}
-	public MultipartFile getCarImage() {
-		return carImage;
-	}
-	public void setCarImage(MultipartFile carImage) {
-		this.carImage = carImage;
-	}
+
 	@Override
 	public String toString() {
 		return "Car [carId=" + carId + ", model=" + model + ", description=" + description + "]";
