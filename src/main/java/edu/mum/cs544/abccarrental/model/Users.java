@@ -9,15 +9,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Users {
 
 	@Id
 	@GeneratedValue
 	private int userId;
-	@NotEmpty(message = "Username should not be null")
 	private String username;
-	@NotEmpty(message = "Password must not be null")
 	private String password;
 	private boolean enabled;
 	public int getUserId() {
