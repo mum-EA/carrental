@@ -13,7 +13,6 @@ public class Roles {
 	@Id
 	@GeneratedValue
 	private int roleId;
-	private String username;
 	private String role;
 	
 	public int getRoleId() {
@@ -28,12 +27,4 @@ public class Roles {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	
 }
