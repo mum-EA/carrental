@@ -9,17 +9,24 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class Authorities {
+public class Roles {
 	@Id
 	@GeneratedValue
-	private int authoritiesId;
+	private int roleId;
 	private String username;
-	private String authority;
-	public int getAuthoritiesId() {
-		return authoritiesId;
+	private String role;
+	
+	public int getRoleId() {
+		return roleId;
 	}
-	public void setAuthoritiesId(int authoritiesId) {
-		this.authoritiesId = authoritiesId;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public String getUsername() {
 		return username;
@@ -27,11 +34,6 @@ public class Authorities {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
+	
 	
 }

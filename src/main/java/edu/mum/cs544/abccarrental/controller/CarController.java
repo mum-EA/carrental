@@ -18,7 +18,7 @@ public class CarController {
 	@Autowired
 	CarService carService;
 
-	@RequestMapping(value = "/cars", method = RequestMethod.GET)
+	@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
 	public String getAllCars(Model model) {
 	
 		List<Car> cars = carService.getAllCars();
@@ -31,10 +31,7 @@ public class CarController {
 	public void save(Model model){
 		
 	}
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String goHome(){
-		return "home";
-	}
+	
 	
 	
 }
