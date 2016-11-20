@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <head>
@@ -62,11 +67,32 @@
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<li><a href="<c:url value="/" />">Home</a></li>
-								<li><a href="<c:url value="/product/productList/all" />">Vehicles</a></li>
-	                       		 <li><a href="<c:url value="/product/productList/all" />">Manage reservations</a></li>
-	                       		 <li><a href="<c:url value="/product/productList/all" />">Account settings</a></li>
-								<li><a href="<c:url value="/login" />">Login</a></li>
-								<li><a href="<c:url value="/about" />">About Us</a></li>
+								<li>
+								<li><sec:authorize
+										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+										<a href="<c:url value="/product/productList/all" />">Manage
+											reservations</a>
+									</sec:authorize>
+								<li><sec:authorize
+										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+										<a href="<c:url value="/customerdetail" />">Account
+											settings</a>
+									</sec:authorize></li>
+								<li><sec:authorize
+										access="!hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+										<a href="<c:url value="/login" />">Login</a>
+									</sec:authorize></li>
+								<li><sec:authorize access="hasRole('ROLE_ADMIN')">
+										<a href="<c:url value="/logout" />">Logout</a>
+									</sec:authorize></li>
+								<%-- <li><a href="<c:url value="/about" />">About Us</a></li>
+								<li><sec:authorize access="hasRole('ROLE_ADMIN')">
+										<p>If you are admin only</p>
+									</sec:authorize></li> --%>
+									<li class = "welcometext"><sec:authorize
+										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+										Welcome: <strong>${username}</strong>
+									</sec:authorize></li>
 							</ul>
 							<ul class="nav navbar-nav pull-right">
 

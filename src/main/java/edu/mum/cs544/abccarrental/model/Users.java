@@ -3,13 +3,14 @@ package edu.mum.cs544.abccarrental.model;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.JoinColumn;
 
 
@@ -19,19 +20,19 @@ public class Users implements Serializable{
 
 	private static final long serialVersionUID = 10000000000000012L;
 	@Id
+	private int userId;
 	private String username;
 	private String password;
 	private boolean enabled;
 	private String email;
-	@Embedded
-	private Address address;
-	
-	 @ManyToMany(fetch = FetchType.LAZY)
-	    @JoinTable(name = "user_roles", 
-	             joinColumns = { @JoinColumn(name = "User_Id") }, 
-	             inverseJoinColumns = { @JoinColumn(name = "Role_Id") })
-	    private Set<Roles> userRoles = new HashSet<Roles>();
-	//user info
+	private String name;
+	private String street;
+	private String city;
+	private String state;
+	private String country;
+	private int zip;
+
+
 	
 	public String getUsername() {
 		return username;
@@ -57,40 +58,54 @@ public class Users implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Address getAddress() {
-		return address;
+	
+	public String getName() {
+		return name;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Set<Roles> getUserRoles() {
-		return userRoles;
+	public String getStreet() {
+		return street;
 	}
-	public void setUserRoles(Set<Roles> userRoles) {
-		this.userRoles = userRoles;
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public int getZip() {
+		return zip;
+	}
+	public void setZip(int zip) {
+		this.zip = zip;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Users other = (Users) obj;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public String toString() {
+		return "Users [username=" + username + ", password=" + password + ", enabled=" + enabled + ", email=" + email
+				+ ", name=" + name + ", street=" + street + ", city=" + city + ", state=" + state + ", country="
+				+ country + ", zip=" + zip + "]";
 	}
 	
 	

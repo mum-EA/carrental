@@ -26,7 +26,8 @@ public class UsersServiceImpl implements IUsersService {
 	}
 	@Override
 	public void save(Users user) {
-		user.setUsername(passwordEncoder.encode(user.getUsername()));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setEnabled(true); //when a customer creates an account, the are enabled
 		userRepo.save(user);
 	}
 	@Override
@@ -49,16 +50,13 @@ public class UsersServiceImpl implements IUsersService {
 		// TODO Auto-generated method stub
 		Users userOld = userRepo.findUserByUserName(user.getUsername());
 		if(userOld!=null){
-			userOld.setUsername(user.getUsername());
 			if(!user.getPassword().equals(userOld.getPassword())){
                 userOld.setPassword(passwordEncoder.encode(user.getPassword()));
             }
-			userOld.setEmail(user.getEmail());
-			userOld.setEnabled(user.isEnabled());
-			userOld.setAddress(user.getAddress());
-			userOld.setUserRoles(user.getUserRoles());
+			userRepo.updateUser(userOld.getPassword(), user.getEmail(), user.getName(), user.getStreet(), user.getState(), user.getZip(), user.getCountry(), user.getUsername(), user.getCity());
 		}
 	}
+	
 	
 
 }

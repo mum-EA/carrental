@@ -20,6 +20,7 @@
 		<security:form-login login-page="/login"
 			login-processing-url="/login"
 			default-target-url="/home"
+			authentication-success-forward-url=""
 			username-parameter="username" password-parameter="password" />
 		<!-- <security:logout logout-success-url="/login?logout" /-->
 		<!-- enable csrf protection -->

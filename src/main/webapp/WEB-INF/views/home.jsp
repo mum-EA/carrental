@@ -1,7 +1,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ include file="/WEB-INF/views/template/header.jsp" %>
-<%@ taglib prefix="imgtag" uri="/WEB-INF/tlds/img_tag" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/views/template/header.jsp"%>
 
+<%@ taglib prefix="imgtag" uri="/WEB-INF/tlds/img_tag" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Login page</title>
+<link href="<c:url value='/resources/css/bootstrap-min.css' />"
+	rel="stylesheet"></link>
+<link href="<c:url value='/resources/css/app.css' />" rel="stylesheet"></link>
+<link rel="stylesheet" type="text/css"
+	href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+</head>
+
+<body>	
         <!-- Carousel
         ================================================== -->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -44,10 +61,10 @@
             <div class="row">
                 <div class="col-lg-4">
                     <a class="btn btn-default" href="<c:url value="/product/productList?searchCondition=Television" />" role="button">
-                        <img class="img-circle" src="<c:url value="/resources/images/television.jpg"/>" alt="Instrument Image" width="140" height="140">
+                        <img class="img-circle" src="<c:url value="/resources/images/toyota.jpg"/>" alt="Instrument Image" width="140" height="140">
                     </a>
 
-                    <h2>Television</h2>
+                    <h2>Toyota</h2>
 
                 </div>
 
@@ -55,25 +72,25 @@
 
                 <div class="col-lg-4">
                     <a class="btn btn-default" href="<c:url value="/product/productList?searchCondition=Computers" />" role="button">
-                        <img class="img-circle" src="<c:url value="/resources/images/notebook.jpg"/>" alt="Instrument Image" width="140" height="140">
+                        <img class="img-circle" src="<c:url value="/resources/images/mitsubishi.jpg"/>" alt="Instrument Image" width="140" height="140">
                     </a>
 
-                    <h2>Computers</h2>
+                    <h2>Mitsubishi</h2>
 
                 </div>
 
 
                 <div class="col-lg-4">
                     <a class="btn btn-default" href="<c:url value="/product/productList?searchCondition=Cell Phones" />" role="button">
-                        <img class="img-circle" src="<c:url value="/resources/images/smartphone.jpg"/>" alt="Instrument Image" width="140" height="140">
+                        <img class="img-circle" src="<c:url value="/resources/images/lamburghini.jpg"/>" alt="Instrument Image" width="140" height="140">
                     </a>
 
-                    <h2>Cell Phones</h2>
+                    <h2>Lamburghini</h2>
 
                 </div>
             </div>
             <hr/>
-            <h2>Recent products:</h2>
+            <h2>Newly added cars</h2>
             <div class="row">
             
 	            
@@ -82,3 +99,5 @@
 
 
 <%@ include file="/WEB-INF/views/template/footer.jsp" %>
+</body>
+</html>
