@@ -20,11 +20,11 @@
 		<div class="well lead">Customer registration form</div>
 		<spring:url value="/addnewcustomer" var="custActionUrl" />
 
-		<form:form class="form-horizontal" method="post"
-			modelAttribute="user" action="${custActionUrl}">
-<%-- 			<form:input type="hidden" path="userId" id="userId" />
+		<form:form class="form-horizontal" method="post" modelAttribute="user"
+			action="${custActionUrl}">
+			<%-- 			<form:input type="hidden" path="userId" id="userId" />
  --%>
- 			<form:hidden path="userId" />
+			<form:hidden path="userId" />
 			<spring:bind path="username">
 				<div class="row">
 					<div class="form-group col-md-12">
@@ -148,7 +148,7 @@
 			<spring:bind path="country">
 
 				<div class="row">
-					<div class="form-group col-md-12">
+					<div class="form-group col-md-12 country-div">
 						<label class="col-md-3 control-lable" for="country">Country:</label>
 						<div class="col-md-7">
 							<form:input type="text" path="country" id="country"
@@ -185,13 +185,14 @@
                     </c:choose>
                 </div>
             </div> --%>
-            <div class="form-group">
-		  <div class="col-sm-offset-2 col-sm-10">
-			
-			     <form:button type="submit" class="btn-lg btn-primary pull-right">Submit</form:button>
-		  </div>
-		</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+
+					<form:button type="submit" class="btn-lg btn-primary pull-right">Submit</form:button>
+				</div>
+			</div>
 		</form:form>
 	</div>
+	<%@ include file="/WEB-INF/views/template/footer.jsp"%>
 </body>
 </html>

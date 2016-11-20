@@ -2,6 +2,7 @@ package edu.mum.cs544.abccarrental.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -112,11 +113,14 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/addnewcustomer", method = RequestMethod.POST)
-	public String processAdd(@ModelAttribute("user") Users user, BindingResult bindingResult) {
+	public String processAdd(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult) {
 		// add user information
+		if(bindingResult.hasErrors()){
+			return "registercustomer";
+		} else{
 		String username = getPrincipal();
 		System.out.println("USER "+ username);
-		if (!username.equals(null)) {
+		if (!username.equals("anonymousUser")) {
 			userService.updateUser(user);
 			System.out.println("**************************************************");
 			System.out.println("updateed");
@@ -124,12 +128,17 @@ public class MainController {
 			System.out.println("usernotfound");
 		userService.save(user);
 		Roles role = new Roles();
-		role.setRole("ROLE_ADMIN");
+		if(user.getUsername().equalsIgnoreCase("Administrator") ||(user.getUsername().equalsIgnoreCase("Admin"))){
+			role.setRole("ROLE_ADMIN");
+		} else{
+		role.setRole("ROLE_CUSTOMER");
+		}
 		role.setUsername(user.getUsername());
 		roleService.Save(role);
 //		System.out.println("****************************************************");
 	}
 		return "redirect:/home";
+		}
 	}
 	
 	@ExceptionHandler(NoHandlerFoundException.class)

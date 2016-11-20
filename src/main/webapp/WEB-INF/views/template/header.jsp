@@ -33,6 +33,7 @@
 <!-- MaCarouselin CSS -->
 <link href="<c:url value="/resources/css/carousel.css" />"
 	rel="stylesheet">
+<link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
 
 <!-- Main CSS -->
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
@@ -62,17 +63,23 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#">ABC car rental</a>
+							<a class="navbar-brand" href="<c:url value="/" />">ABC car
+								rental</a>
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="<c:url value="/" />">Home</a></li>
-								<li>
-								<li><sec:authorize
-										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 										<a href="<c:url value="/product/productList/all" />">Manage
-											reservations</a>
-									</sec:authorize>
+											Vehicles</a>
+									</sec:authorize></li>
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+										<a href="<c:url value="/product/productList/all" />">Manage
+											all reservations</a>
+									</sec:authorize></li>
+								<li><sec:authorize
+										access="hasAnyRole('ROLE_CUSTOMER')">
+										<a href="<c:url value="/product/productList/all" />">My reservations</a>
+									</sec:authorize></li>
 								<li><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
 										<a href="<c:url value="/customerdetail" />">Account
@@ -82,14 +89,14 @@
 										access="!hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
 										<a href="<c:url value="/login" />">Login</a>
 									</sec:authorize></li>
-								<li><sec:authorize access="hasRole('ROLE_ADMIN')">
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
 										<a href="<c:url value="/logout" />">Logout</a>
 									</sec:authorize></li>
 								<%-- <li><a href="<c:url value="/about" />">About Us</a></li>
 								<li><sec:authorize access="hasRole('ROLE_ADMIN')">
 										<p>If you are admin only</p>
 									</sec:authorize></li> --%>
-									<li class = "welcometext"><sec:authorize
+								<li class="welcometext"><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
 										Welcome: <strong>${username}</strong>
 									</sec:authorize></li>

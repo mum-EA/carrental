@@ -23,6 +23,7 @@ background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, 
  
 body, #mainWrapper, .form-control{
     font-size:12px!important;
+    background-image: none !important;
 }
  
 #mainWrapper {
@@ -55,3 +56,17 @@ body, #mainWrapper, .form-control{
 .login-form {
     padding: 10%;
 }
+.help-inline{
+	color: red;
+	font-weight: 700;
+}
+.col-md-3 {
+    width: 10% !important;
+}
+.well{
+	padding: 2px !important;
+}
+.btn-lg{
+	padding: 2px 2px !important;
+}
+

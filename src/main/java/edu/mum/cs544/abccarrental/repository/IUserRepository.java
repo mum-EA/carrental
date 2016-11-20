@@ -22,6 +22,6 @@ public interface IUserRepository extends CrudRepository<Users, Integer> {
 	@Query("update Users u set u.password = :password, u.email = :email, u.name = :name,u.city = :city, u.street = :street"
 			+ ",u.state = :state, u.zip = :zip, u.country = :country where u.username = :username")
 	void updateUser(@Param("password") String password, @Param("email") String email, @Param("name") String name,
-					@Param("street") String street, @Param("state") String state, @Param("zip") int zip,
+					@Param("street") String street, @Param("state") String state, @Param("zip") String zip,
 					@Param("country") String country, @Param("username") String username, @Param("city") String city);
 }

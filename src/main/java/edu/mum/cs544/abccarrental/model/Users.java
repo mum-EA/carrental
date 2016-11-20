@@ -1,36 +1,50 @@
 package edu.mum.cs544.abccarrental.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.JoinColumn;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Users implements Serializable{
 
 
 	private static final long serialVersionUID = 10000000000000012L;
 	@Id
 	private int userId;
+	@NotEmpty
+	@Length(min=6, message="User should be at least 6 charactes")
 	private String username;
+	@NotEmpty
 	private String password;
 	private boolean enabled;
+	@NotEmpty
+    @Pattern(regexp=".+@.+\\..+", message="An invalid email address!")
 	private String email;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String street;
+	@NotEmpty
 	private String city;
+	@NotEmpty
 	private String state;
+	@NotEmpty
 	private String country;
-	private int zip;
+//	@NotEmpty
+//	@Min(5)
+//	@Max(5)
+	@NotEmpty
+	@Pattern(regexp = "^[0-9]{5}(?:-[0-9]{4})?$", message = "Invalid postal code")
+	private String zip;
 
 
 	
@@ -89,10 +103,11 @@ public class Users implements Serializable{
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public int getZip() {
+	
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public int getUserId() {
