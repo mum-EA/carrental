@@ -18,13 +18,21 @@
 			access="hasRole('ROLE_CUSTOMER')" />
 
 		<security:form-login login-page="/login"
-			login-processing-url="/login"
-			default-target-url="/home"
-			authentication-success-forward-url=""
-			username-parameter="username" password-parameter="password" />
-		<!-- <security:logout logout-success-url="/login?logout" /-->
+			login-processing-url="/login" default-target-url="/home"
+			authentication-success-forward-url="" username-parameter="username"
+			password-parameter="password" />
+		<!-- <security:logout logout-success-url="/login?logout" / -->
 		<!-- enable csrf protection -->
-		<security:csrf disabled="true"/>
+		<!-- Session management -->
+		<security:remember-me remember-me-parameter="_spring_security_remember_me"
+			remember-me-cookie="SPRING_SECURITY_REMEMBER_ME_COOKIE" />
+		<security:session-management
+			invalid-session-url="/sessionhasexpired" session-authentication-error-url="/illegallogin">
+			<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+			</security:session-management>
+			
+		<security:logout delete-cookies="JSESSIONID" />
+		<security:csrf disabled="true" />
 	</security:http>
 
 	<bean id="bcryptEncoder"

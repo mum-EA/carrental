@@ -161,30 +161,7 @@
 				</div>
 
 			</spring:bind>
-			<%--  <div class="row">
-                <div class="form-group col-md-12">
-                    <label class="col-md-3 control-lable" for="userProfiles">Roles</label>
-                    <div class="col-md-7">
-                        <form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />
-                        <div class="has-error">
-                            <form:errors path="userProfiles" class="help-inline"/>
-                        </div>
-                    </div>
-                </div>
-            </div> --%>
-
-			<%-- <div class="row">
-                <div class="form-actions floatRight">
-                    <c:choose>
-                        <c:when test="${edit}">
-                            <input type="submit" value="Update" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/list' />">Cancel</a>
-                        </c:when>
-                        <c:otherwise>
-                            <input type="submit" value="Register" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/list' />">Cancel</a>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div> --%>
+			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 

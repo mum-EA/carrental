@@ -1,8 +1,8 @@
 package edu.mum.cs544.abccarrental.model;
 
-import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
 
@@ -13,12 +13,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
-public class Users implements Serializable{
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+public class Users{
 
 
-	private static final long serialVersionUID = 10000000000000012L;
 	@Id
+	@GeneratedValue
 	private int userId;
 	@NotEmpty
 	@Length(min=6, message="User should be at least 6 charactes")
@@ -122,6 +122,31 @@ public class Users implements Serializable{
 				+ ", name=" + name + ", street=" + street + ", city=" + city + ", state=" + state + ", country="
 				+ country + ", zip=" + zip + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Users other = (Users) obj;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 }

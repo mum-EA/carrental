@@ -46,6 +46,7 @@
 								class="form-control" id="password" name="password"
 								placeholder="Enter Password" required>
 						</div>
+						
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
 
@@ -53,17 +54,23 @@
 							<input type="submit"
 								class="btn btn-block btn-primary btn-default" value="Log in">
 						</div>
+						<div class="input-group input-sm">
+
+							<label for="remember-me" class="input-group-addon remembermelabel">Remember
+								Me</label> <input type="checkbox" id="remember-me" name="remember-me"
+								class="form-control" />
+						</div>
 					</form>
 					<spring:url value="/registernewcustomer" var="urlAddCustomer" />
-					 <a href="${urlAddCustomer}">Sign up</a>
-<%-- 					<a href="<spring:url value="/registercustomer" />"> Signup</a>
+					<a href="${urlAddCustomer}" class = "signup">Register as new customer</a>
+					<%-- 					<a href="<spring:url value="/registercustomer" />"> Signup</a>
  --%>
 				</div>
 			</div>
 		</div>
 	</div>
 
-<%@ include file="/WEB-INF/views/template/footer.jsp" %>
+	<%@ include file="/WEB-INF/views/template/footer.jsp"%>
 </body>
 </html>
 </body>

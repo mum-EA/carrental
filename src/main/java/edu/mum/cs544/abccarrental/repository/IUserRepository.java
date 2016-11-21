@@ -6,15 +6,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.cs544.abccarrental.model.Users;
 
+@Repository
 public interface IUserRepository extends CrudRepository<Users, Integer> {
 
-	@Query("select u from Users u")
-	List<Users> findAllUsers();
+	List<Users> findAll();
 	@Query("select u from Users u where u.username = :userName")
 	Users findUserByUserName(@Param("userName") String username);
 	@Modifying

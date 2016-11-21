@@ -1,5 +1,7 @@
 package edu.mum.cs544.abccarrental.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -50,12 +53,14 @@ public class MainController {
 		return "dba";
 	}
 
-	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+	@RequestMapping(value = "/sessionhasexpired", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
-		return "accessDenied";
+		return "sessionhasexpired";
 	}
-
+	@RequestMapping(value = "illegallogin", method = RequestMethod.GET)
+	public String illegalLogin(ModelMap model){
+		return "illegallogin";
+	}
 	@RequestMapping(value = "/login")
 	public String loginPage() {
 		return "login";
@@ -70,17 +75,7 @@ public class MainController {
 		return "redirect:/login?logout";
 	}
 
-	private String getPrincipal() {
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails) principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
-	}
+	
 
 	@RequestMapping(value = "/registernewcustomer", method = RequestMethod.GET)
 	public String showCustomerRegister(Model model) {
@@ -94,13 +89,6 @@ public class MainController {
 		model.addAttribute("user", user);
 		return "registercustomer";
 	}
-	// @RequestMapping(value = "addnewcustomer", method = RequestMethod.GET)
-	// public void addNewCustomer(@ModelAttribute("users") Users user, Model
-	// model){
-	// model.addAttribute("users", user);
-	// userService.save(user);
-	// System.out.println("------------------------------------------------");
-	// }
 
 	@RequestMapping(value = "/customerdetail", method = RequestMethod.GET)
 	public String showCustomerDetail(Model model) {
@@ -111,21 +99,40 @@ public class MainController {
 		model.addAttribute("user", user);
 		return "customerdetails";
 	}
+	@RequestMapping(value = "/allcustomers", method = RequestMethod.GET)
+	public String showAllCustomers(Model model) {
+		List<Users> users = userService.findAllUsers();
+		System.out.println(users);
+		model.addAttribute("customers", users);
+		return "customers";
+	}
+	@RequestMapping(value = "/managecustomer/{username}", method = RequestMethod.GET)
+	public String getCustomerInfo(@PathVariable("username") String username, Model model) {
+		Users oldUser = userService.findUserByUserName(username.trim());
+		model.addAttribute("user", oldUser);
+		
+		return "activation";
+	}
+	@RequestMapping(value = "/dealactivation", method = RequestMethod.POST)
+	public String enableDisableCustomer(@ModelAttribute("user") Users user, BindingResult bindingResult) {
+		System.out.println("Before this");
+		System.out.println("User name is: "+ user.getUsername());
+		Users oldUser = userService.findUserByUserName(user.getUsername());
+		System.out.println("After this:");
+		oldUser.setEnabled(user.isEnabled());
+		userService.updateUser(oldUser);
+		return "customers";
+	}
 
 	@RequestMapping(value = "/addnewcustomer", method = RequestMethod.POST)
 	public String processAdd(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult) {
-		// add user information
 		if(bindingResult.hasErrors()){
 			return "registercustomer";
 		} else{
 		String username = getPrincipal();
-		System.out.println("USER "+ username);
 		if (!username.equals("anonymousUser")) {
 			userService.updateUser(user);
-			System.out.println("**************************************************");
-			System.out.println("updateed");
 		} else{
-			System.out.println("usernotfound");
 		userService.save(user);
 		Roles role = new Roles();
 		if(user.getUsername().equalsIgnoreCase("Administrator") ||(user.getUsername().equalsIgnoreCase("Admin"))){
@@ -135,7 +142,6 @@ public class MainController {
 		}
 		role.setUsername(user.getUsername());
 		roleService.Save(role);
-//		System.out.println("****************************************************");
 	}
 		return "redirect:/home";
 		}
@@ -150,5 +156,17 @@ public class MainController {
 	    return "page-not-found";
 
 	}
+	private String getPrincipal() {
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
+
+	//initialize 
 }

@@ -38,7 +38,9 @@ public class UsersServiceImpl implements IUsersService {
 	@Override
 	public List<Users> findAllUsers() {
 		// TODO Auto-generated method stub
-		return userRepo.findAllUsers();
+		System.out.println("From service");
+		System.out.println(userRepo.findAll());
+		return userRepo.findAll();
 	}
 	@Override
 	public Users findUserByUserName(String username) {

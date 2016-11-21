@@ -65,8 +65,36 @@ body, #mainWrapper, .form-control{
 }
 .well{
 	padding: 2px !important;
+	margin-left: 200px !important;
 }
 .btn-lg{
 	padding: 2px 2px !important;
+}
+.table th {
+    text-align: center;
+    background: rgb(177, 178, 186) !important;
+    color: white;
+}
+.remembermelabel{
+	border: none !important;
+	background-color: #EAEAEA !important;
+}
+.login-container{
+	background-color: #EAEAEA !important;
+	border-width: 2px !important;
+}
+input[type=checkbox]{
+	border: none !important;
+	box-shadow: none !important;
+}
+.signup{
+	text-decoration: underline;
+	font-weight: 700;
+}
+.abcrentalerror{
+	border-width: 1px;
+	font-weight: 700;
+	border-color: #fff;
+	color: red;
 }
 

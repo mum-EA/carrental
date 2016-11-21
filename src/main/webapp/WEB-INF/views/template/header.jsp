@@ -68,6 +68,10 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
+							<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+										<a href="<c:url value="/allcustomers" />">Manage
+											customers</a>
+									</sec:authorize></li>
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 										<a href="<c:url value="/product/productList/all" />">Manage
 											Vehicles</a>
