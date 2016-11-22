@@ -71,18 +71,16 @@
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 										<a href="<c:url value="/allcustomers" />">Manage customers</a>
 									</sec:authorize></li>
+									<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+										<a href="<c:url value="/admin/vehicles/addvehicle" />">Add new vehicle</a>
+									</sec:authorize></li>
+								
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 										<a href="<c:url value="/admin/vehicles" />">Manage Vehicles</a>
 									</sec:authorize></li>
-								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/admin/vehicles/addvehicle" />">Add new vehicle</a>
-									</sec:authorize></li>
-								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/product/productList/all" />">Manage
-											all reservations</a>
-									</sec:authorize></li>
+								
 								<li><sec:authorize access="hasAnyRole('ROLE_CUSTOMER')">
-										<a href="<c:url value="/product/productList/all" />">My
+										<a href="<c:url value="/myreservations" />">My
 											reservations</a>
 									</sec:authorize></li>
 								<li><sec:authorize

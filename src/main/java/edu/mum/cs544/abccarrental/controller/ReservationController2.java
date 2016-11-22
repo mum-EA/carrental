@@ -19,6 +19,7 @@ import edu.mum.cs544.abccarrental.model.Payment;
 import edu.mum.cs544.abccarrental.model.Reservation;
 import edu.mum.cs544.abccarrental.model.Users;
 import edu.mum.cs544.abccarrental.model.Vehicle;
+import edu.mum.cs544.abccarrental.model.VehicleStatus;
 import edu.mum.cs544.abccarrental.service.IReservationService;
 import edu.mum.cs544.abccarrental.service.IUsersService;
 import edu.mum.cs544.abccarrental.service.IVehicleService;
@@ -68,6 +69,18 @@ public class ReservationController2 {
 		return "reservationList";
 	}
 	
+	@RequestMapping(value = "/myreservations")
+	public String showMyReservations(Reservation reservation, Model model){
+		
+		String currentUser = MainController.getPrincipal();
+		int userId = userService.findUserByUserName(currentUser).getUserId();
+		List<Reservation>reservations = reservationService.getMyReservations(userId);
+		model.addAttribute("reservations", reservations);
+		System.out.println("User Id is: "+ userId);
+		System.out.println("Current user is: "+ currentUser);
+
+		return "myreservations";
+	}
 	
 	@RequestMapping(value="/cancelAddReservation", method=RequestMethod.GET )
 	public String cancelreservation(Model model) {		
@@ -78,8 +91,10 @@ public class ReservationController2 {
 	
 	
 	@RequestMapping(value="/rentMore", method=RequestMethod.POST )
-	public String RentMore(Model model) {		
-		List<Vehicle> vehicles = vehicleService.findAllVehicle();
+	public String RentMore(Model model) {
+
+		//TODO vehicles added by the user should not be displayed again
+		List<Vehicle> vehicles = vehicleService.findVehiclesByAvailability(VehicleStatus.Available);
 		model.addAttribute("vehicles", vehicles );
 		return "vehicleList2";
 	}

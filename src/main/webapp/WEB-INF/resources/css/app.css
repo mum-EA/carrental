@@ -116,10 +116,10 @@ input[type=checkbox] {
 .form-horizontal {
 	width: 90% !important;
 }
-.footertext{
-	color: #ddd;
-	font-weight: 700;
-	margin-bottom: 20px;
+.footertext {
+    color: #0b0307;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .form-actions {
@@ -191,6 +191,7 @@ html {
 	position: fixed;
     bottom: 0;
     width: 100%;
+    background: #fff9f6;
 }
 .customerssay{
 .font-family: Georgia, serif;
@@ -224,4 +225,21 @@ position: absolute;
 left: -20px;
 top: -20px;
 color: #7a7a7a;
+}
+.rentmore{
+	padding-left: 110px;
+}
+.makepayment{
+	padding-left: 110px;
+	font-weight: 750;
+}
+.reserve{
+	font-weight: 800;
+	font-style: italic;
+	color: #03A9F4;
+}
+.pull-right {
+    float: right!important;
+    margin-right: 50px;
+    font-weight: 900;
 }

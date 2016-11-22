@@ -73,7 +73,7 @@
 
 			<p>
 				<c:if test="${vehicle.status == 'Available' }">
-					<a
+					<a class = "reserve"
 						href=" <c:url value='/rentReservation?id=${vehicle.vehicleId}' />">Reserve
 					</a>
 					<br />

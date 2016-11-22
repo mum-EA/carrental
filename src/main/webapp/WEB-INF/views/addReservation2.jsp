@@ -11,8 +11,9 @@
 <title>Add Reservation</title>
 </head>
 <body>
+<div class="generic-container">
+		<div class="well lead">Enter The following fields for Vehicle ${vehicle.vehicleId }.</div>
 
-Enter The following fields for Vehicle ${vehicle.vehicleId }.
 
 		<form:form action="reservation" method="POST" modelAttribute = "reservation">
 		
@@ -21,7 +22,7 @@ Enter The following fields for Vehicle ${vehicle.vehicleId }.
 					<div class="form-group col-md-12">
 						<label class="col-md-3 control-lable" >Pick Up date :</label>
 						<div class="col-md-7">
-							<form:input type="text" path="pickupDate" />
+							<form:input type="text" path="pickupDate" class = "form-control input-sm"/>
 							<form:errors path="pickupDate" cssStyle="color : red;" />
 						</div>
 					</div>
@@ -31,7 +32,7 @@ Enter The following fields for Vehicle ${vehicle.vehicleId }.
 					<div class="form-group col-md-12">
 						<label class="col-md-3 control-lable" >Return date :</label>
 						<div class="col-md-7">
-							<form:input type="text" path="returnDate" />
+							<form:input type="text" path="returnDate" class = "form-control input-sm"/>
 							<form:errors path="returnDate" cssStyle="color : red;" />
 						</div>
 					</div>
@@ -41,7 +42,7 @@ Enter The following fields for Vehicle ${vehicle.vehicleId }.
 					<div class="form-group col-md-12">
 						<label class="col-md-3 control-lable" >Location To</label>
 						<div class="col-md-7">
-							<form:input type="text" path="locationto" />
+							<form:input type="text" path="locationto" class = "form-control input-sm"/>
 							<form:errors path="locationto" cssStyle="color : red;" />
 						</div>
 					</div>
@@ -51,7 +52,7 @@ Enter The following fields for Vehicle ${vehicle.vehicleId }.
 					<div class="form-group col-md-12">
 						<label class="col-md-3 control-lable" >Location From</label>
 						<div class="col-md-7">
-							<form:input type="text" path="locationfrom" />
+							<form:input type="text" path="locationfrom" class = "form-control input-sm"/>
 							<form:errors path="locationfrom" cssStyle="color : red;" />
 						</div>
 					</div>
@@ -60,17 +61,17 @@ Enter The following fields for Vehicle ${vehicle.vehicleId }.
 				<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 
-					<input type="submit" value="Add" name="add" />
+					<input type="submit" value="Reserve" name="add" class="btn btn-primary"//>
 				</div>
 			</div>
 		</form:form>
 		
-		
+		</br>
 		<form:form action="cancelAddReservation" method="GET">
 		<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 
-					<input type="submit" value="Cancel" name="cancel" />
+					<input type="submit" value="Cancel" name="cancel" class="btn btn-primary"//>
 				</div>
 			</div>
 		</form:form>
@@ -111,6 +112,7 @@ Enter The following fields for Vehicle ${vehicle.vehicleId }.
 		</form:form>
 		</div> --%>
 		
+</div>
 
 </body>
 </html>

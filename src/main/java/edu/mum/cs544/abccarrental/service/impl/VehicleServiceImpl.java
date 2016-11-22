@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.mum.cs544.abccarrental.model.Vehicle;
+import edu.mum.cs544.abccarrental.model.VehicleStatus;
 import edu.mum.cs544.abccarrental.repository.IVehicleRepository;
 import edu.mum.cs544.abccarrental.service.IVehicleService;
 
@@ -48,6 +49,13 @@ public class VehicleServiceImpl implements IVehicleService {
 	@Override
 	public void delete(int id) {
 		vehiclerepository.delete(id);
+	}
+
+
+	@Override
+	public List<Vehicle> findVehiclesByAvailability(VehicleStatus available) {
+		// TODO Auto-generated method stub
+		return vehiclerepository.findVehiclesByAvailability(available);
 	}
 
 	

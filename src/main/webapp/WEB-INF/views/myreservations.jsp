@@ -7,9 +7,8 @@
 <%@ include file="/WEB-INF/views/template/header.jsp"%>
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Vehicle</title>
+<title>Insert title here</title>
 </head>
 <body>
 <div class="container">
@@ -51,11 +50,7 @@
 		</tr>			
 		</c:forEach>
 	</table>
-	<form:form action="rentMore" method="POST"  cssClass="rentmore">
-			<input type="submit" class="btn btn-primary" value="Rent More..."/>
-		</form:form>
-		
-	<a class = "makepayment" class="btn btn-primary" href='<c:url value = '/makePayment'  />'>Make Payment</a>
+	
 	</div>
 </body>
 </html>

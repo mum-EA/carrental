@@ -28,6 +28,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import edu.mum.cs544.abccarrental.model.Roles;
 import edu.mum.cs544.abccarrental.model.Users;
 import edu.mum.cs544.abccarrental.model.Vehicle;
+import edu.mum.cs544.abccarrental.model.VehicleStatus;
 import edu.mum.cs544.abccarrental.service.IRolesService;
 import edu.mum.cs544.abccarrental.service.IUsersService;
 import edu.mum.cs544.abccarrental.service.IVehicleService;
@@ -45,7 +46,7 @@ public class MainController {
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		model.addAttribute("username", getPrincipal());
-		List<Vehicle> vehicles = vehicleService.findAllVehicle();
+		List<Vehicle> vehicles = vehicleService.findVehiclesByAvailability(VehicleStatus.Available);
 		model.addAttribute("vehicles", vehicles );
 		return "home";
 	}
@@ -147,6 +148,8 @@ public class MainController {
 			return "registercustomer";
 		} else {
 			String username = getPrincipal();
+			
+			System.out.println("Current user is: "+ username);
 			if (!username.equals("anonymousUser")) {
 				userService.updateUser(user);
 			} else {

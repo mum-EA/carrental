@@ -30,8 +30,8 @@
 	</c:forEach> --%>
 	
 	<c:forEach items="${vehicles }" var="vehicle">
-	<div style="float: left; padding: 10px ;width: 400px; height:300px">
-			<p><img src="data:image/png;base64,${vehicle.base64imageFile}" width="400" height="300" /></p>
+	<div style="float: left; padding: 10px ;width: 300px; height:300px">
+			<p><img class = "img-circle" src="data:image/png;base64,${vehicle.base64imageFile}" width="400" height="300" /></p>
 			<p>Vehicle Id : ${vehicle.vehicleId }</p>
 			<p>Vehicle Brand : ${vehicle.brand }</p>
 			<p>Vehicle Daily Price : ${vehicle.dailyPrice }</p>
