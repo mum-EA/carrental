@@ -38,7 +38,7 @@
 
 		<security:logout delete-cookies="true" invalidate-session="true"
 			logout-url="/login?logout" />
-		<!-- <security:csrf /> -->
+		<security:csrf  disabled="true"/> 
 		
 	</security:http>
 

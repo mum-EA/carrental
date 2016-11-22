@@ -68,21 +68,22 @@
 						</div>
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-							<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/allcustomers" />">Manage
-											customers</a>
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+										<a href="<c:url value="/allcustomers" />">Manage customers</a>
 									</sec:authorize></li>
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/product/productList/all" />">Manage
-											Vehicles</a>
+										<a href="<c:url value="/admin/vehicles" />">Manage Vehicles</a>
+									</sec:authorize></li>
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+										<a href="<c:url value="/admin/vehicles/addvehicle" />">Add new vehicle</a>
 									</sec:authorize></li>
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 										<a href="<c:url value="/product/productList/all" />">Manage
 											all reservations</a>
 									</sec:authorize></li>
-								<li><sec:authorize
-										access="hasAnyRole('ROLE_CUSTOMER')">
-										<a href="<c:url value="/product/productList/all" />">My reservations</a>
+								<li><sec:authorize access="hasAnyRole('ROLE_CUSTOMER')">
+										<a href="<c:url value="/product/productList/all" />">My
+											reservations</a>
 									</sec:authorize></li>
 								<li><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
@@ -93,7 +94,8 @@
 										access="!hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
 										<a href="<c:url value="/login" />">Login</a>
 									</sec:authorize></li>
-								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+								<li><sec:authorize
+										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
 										<a href="<c:url value="/logout" />">Logout</a>
 									</sec:authorize></li>
 								<%-- <li><a href="<c:url value="/about" />">About Us</a></li>

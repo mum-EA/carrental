@@ -11,7 +11,7 @@
 	<context:component-scan base-package="edu.mum.cs544.abccarrental" />
 	<mvc:annotation-driven validator="validator" />
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
-	
+
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
 			<bean
@@ -33,7 +33,17 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<bean class="org.springframework.security.web.session.HttpSessionEventPublisher"/>
+	<bean
+		class="org.springframework.security.web.session.HttpSessionEventPublisher" />
 
 
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+		<property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+
+		<!-- max size of file in memory (in bytes) -->
+		<property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+
+	</bean>
 </beans>

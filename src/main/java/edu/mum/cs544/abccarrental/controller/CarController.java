@@ -15,22 +15,22 @@ import edu.mum.cs544.abccarrental.service.CarService;
 @Controller
 public class CarController {
 
-	@Autowired
-	CarService carService;
-
-	@RequestMapping(value = "/vehicles", method = RequestMethod.GET)
-	public String getAllCars(Model model) {
-	
-		List<Car> cars = carService.getAllCars();
-		cars.forEach(e -> System.out.println(e));
-		model.addAttribute("carList", cars);
-		return "vehicles";
-	}
-	
-	@RequestMapping(value = "/cars/add", method = RequestMethod.POST)
-	public void save(Model model){
-		
-	}
+//	@Autowired
+//	CarService carService;
+//
+//	@RequestMapping(value = "/vehiclesss", method = RequestMethod.GET)
+//	public String getAllCars(Model model) {
+//	
+//		List<Car> cars = carService.getAllCars();
+//		cars.forEach(e -> System.out.println(e));
+//		model.addAttribute("carList", cars);
+//		return "vehicles";
+//	}
+//	
+//	@RequestMapping(value = "/cars/add", method = RequestMethod.POST)
+//	public void save(Model model){
+//		
+//	}
 	
 	
 	

@@ -64,12 +64,11 @@ body, #mainWrapper, .form-control {
 }
 
 .col-md-3 {
-	width: 10% !important;
+	width: 15% !important;
 }
 
 .well {
 	padding: 2px !important;
-	margin-left: 200px !important;
 }
 
 .btn-lg {
@@ -135,4 +134,23 @@ input[type=checkbox] {
 .footerarea{
 	text-align: center;
 	margin: auto;
+}
+.table {
+    table-layout: fixed;
+    overflow: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: initial;
+}
+.generic-container{
+	margin-left: 20%;
+}
+.form-group {
+    margin-bottom: 12px;
+}
+.input-sm{
+	width: 60%;
+}
+.form-control{
+	width: 60%;
 }
