@@ -15,11 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import edu.mum.cs544.abccarrental.model.Roles;
@@ -36,7 +39,6 @@ public class MainController {
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
-		model.addAttribute("greeting", "Hi, Welcome to our site");
 		model.addAttribute("username", getPrincipal());
 		return "home";
 	}
@@ -57,10 +59,12 @@ public class MainController {
 	public String accessDeniedPage(ModelMap model) {
 		return "sessionhasexpired";
 	}
+
 	@RequestMapping(value = "illegallogin", method = RequestMethod.GET)
-	public String illegalLogin(ModelMap model){
+	public String illegalLogin(ModelMap model) {
 		return "illegallogin";
 	}
+
 	@RequestMapping(value = "/login")
 	public String loginPage() {
 		return "login";
@@ -74,8 +78,6 @@ public class MainController {
 		}
 		return "redirect:/login?logout";
 	}
-
-	
 
 	@RequestMapping(value = "/registernewcustomer", method = RequestMethod.GET)
 	public String showCustomerRegister(Model model) {
@@ -99,6 +101,7 @@ public class MainController {
 		model.addAttribute("user", user);
 		return "customerdetails";
 	}
+
 	@RequestMapping(value = "/allcustomers", method = RequestMethod.GET)
 	public String showAllCustomers(Model model) {
 		List<Users> users = userService.findAllUsers();
@@ -106,56 +109,66 @@ public class MainController {
 		model.addAttribute("customers", users);
 		return "customers";
 	}
+
 	@RequestMapping(value = "/managecustomer/{username}", method = RequestMethod.GET)
 	public String getCustomerInfo(@PathVariable("username") String username, Model model) {
 		Users oldUser = userService.findUserByUserName(username.trim());
 		model.addAttribute("user", oldUser);
 		
+		System.out.println(oldUser.getName());
+
 		return "activation";
 	}
+
 	@RequestMapping(value = "/dealactivation", method = RequestMethod.POST)
-	public String enableDisableCustomer(@ModelAttribute("user") Users user, BindingResult bindingResult) {
+	public String enableDisableCustomer(@ModelAttribute("user") Users user, Model model) {
+
 		System.out.println("Before this");
-		System.out.println("User name is: "+ user.getUsername());
+		System.out.println("User name is: " + user.getUsername());
 		Users oldUser = userService.findUserByUserName(user.getUsername());
 		System.out.println("After this:");
-		oldUser.setEnabled(user.isEnabled());
+		System.out.println(oldUser);
+//		oldUser.setEnabled(user.isEnabled());
 		userService.updateUser(oldUser);
+		
 		return "customers";
 	}
 
 	@RequestMapping(value = "/addnewcustomer", method = RequestMethod.POST)
 	public String processAdd(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()){
+		if (bindingResult.hasErrors()) {
 			return "registercustomer";
-		} else{
-		String username = getPrincipal();
-		if (!username.equals("anonymousUser")) {
-			userService.updateUser(user);
-		} else{
-		userService.save(user);
-		Roles role = new Roles();
-		if(user.getUsername().equalsIgnoreCase("Administrator") ||(user.getUsername().equalsIgnoreCase("Admin"))){
-			role.setRole("ROLE_ADMIN");
-		} else{
-		role.setRole("ROLE_CUSTOMER");
+		} else {
+			String username = getPrincipal();
+			if (!username.equals("anonymousUser")) {
+				userService.updateUser(user);
+			} else {
+				userService.save(user);
+				Roles role = new Roles();
+				if (user.getUsername().equalsIgnoreCase("Administrator")
+						|| (user.getUsername().equalsIgnoreCase("Admin"))) {
+					role.setRole("ROLE_ADMIN");
+				} else {
+					role.setRole("ROLE_CUSTOMER");
+				}
+				role.setUsername(user.getUsername());
+				roleService.Save(role);
+			}
+			return "redirect:/home";
 		}
-		role.setUsername(user.getUsername());
-		roleService.Save(role);
 	}
-		return "redirect:/home";
-		}
-	}
-	
+
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public String handle(Exception ex) {
-	    return "redirect:/page-not-found";
+		return "redirect:/page-not-found";
 	}
-	@RequestMapping(value = {"/page-not-found"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/page-not-found" }, method = RequestMethod.GET)
 	public String NotFoudPage() {
-	    return "page-not-found";
+		return "page-not-found";
 
 	}
+
 	private String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -168,5 +181,10 @@ public class MainController {
 		return userName;
 	}
 
-	//initialize 
+	// initialize
+	@InitBinder
+	public void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+		// Convert multipart object to byte[]
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	}
 }

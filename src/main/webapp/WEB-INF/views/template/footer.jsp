@@ -2,12 +2,15 @@
 <!-- FOOTER -->
 <footer>
     <br/>
+    <div class = "footerarea">
+    
     <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2016 ABC car rental company.</p>
+    <p class = "footertext">&copy; 2016 ABC car rental company.</p>
+    
+    </div>
+    
 </footer>
-</div>
 
-</div><!-- /.container -->
 
 
 <!-- Bootstrap.js -->

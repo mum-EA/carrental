@@ -49,7 +49,7 @@ public class UsersServiceImpl implements IUsersService {
 	}
 	@Override
 	public void updateUser(Users user) {
-		// TODO Auto-generated method stub
+		
 		Users userOld = userRepo.findUserByUserName(user.getUsername());
 		if(userOld!=null){
 			if(!user.getPassword().equals(userOld.getPassword())){

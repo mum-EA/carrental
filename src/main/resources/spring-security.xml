@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
 
-	<security:http auto-config="true">
+	<security:http auto-config="true" create-session="always" disable-url-rewriting="true">
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/home" access="permitAll" />
 		<security:intercept-url pattern="/admin**"
@@ -27,12 +27,19 @@
 		<security:remember-me remember-me-parameter="_spring_security_remember_me"
 			remember-me-cookie="SPRING_SECURITY_REMEMBER_ME_COOKIE" />
 		<security:session-management
-			invalid-session-url="/sessionhasexpired" session-authentication-error-url="/illegallogin">
-			<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
-			</security:session-management>
-			
-		<security:logout delete-cookies="JSESSIONID" />
-		<security:csrf disabled="true" />
+			session-fixation-protection="newSession"
+			invalid-session-url="/sessionhasexpired"
+			session-authentication-error-url="/illegallogin">
+			<security:concurrency-control
+				max-sessions="1" error-if-maximum-exceeded="true" />
+				
+		</security:session-management>
+		
+
+		<security:logout delete-cookies="true" invalidate-session="true"
+			logout-url="/login?logout" />
+		<!-- <security:csrf /> -->
+		
 	</security:http>
 
 	<bean id="bcryptEncoder"
@@ -48,7 +55,7 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-
+	
 	<!-- Configuring caching mechanisms -Performance issues -->
 
 	<cache:annotation-driven />

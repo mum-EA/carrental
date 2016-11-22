@@ -18,7 +18,6 @@
 
 		<form:form class="form-horizontal" method="post" modelAttribute="user"
 			action="${custActionUrl}">
-			<form:hidden path="userId" />
 			<spring:bind path="username">
 				<div class="row">
 					<div class="form-group col-md-12">
@@ -27,9 +26,9 @@
 						<div class="col-md-7">
 							<form:input type="text" path="username" id="username"
 								class="form-control input-sm" disabled="true" />
-							<div class="has-error">
-								<form:errors path="username" class="help-inline" />
-							</div>
+<!-- 							<div class="has-error"> -->
+<%-- 								<form:errors path="username" class="help-inline" /> --%>
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
@@ -42,9 +41,9 @@
 						<div class="col-md-7">
 							<form:input type="email" path="email" id="email"
 								class="form-control input-sm" disabled="true" />
-							<div class="has-error">
-								<form:errors path="email" class="help-inline" />
-							</div>
+<!-- 							<div class="has-error"> -->
+<%-- 								<form:errors path="email" class="help-inline" /> --%>
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
@@ -57,11 +56,11 @@
 						<div class="col-md-7">
 							<form:radiobutton path="enabled" value = "true" id="enabled"
 								class="form-control input-sm" /> Active
-								<form:radiobutton path="enabled" value = "false" id="enabled"
+								<form:radiobutton path="enabled" value = "false" id="disabled"
 								class="form-control input-sm" /> DeActive
-							<%-- <div class="has-error">
-								<form:errors path="enabled" class="help-inline" />
-							</div> --%>
+<!-- 							<div class="has-error"> -->
+<%-- 								<form:errors path="enabled" class="help-inline" /> --%>
+<!-- 							</div>  -->
 						</div>
 					</div>
 				</div>
