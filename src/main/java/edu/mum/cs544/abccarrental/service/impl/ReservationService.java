@@ -19,7 +19,9 @@ public class ReservationService implements IReservationService{
 	@Override
 	public void add(Reservation reservation) {
 		// TODO Auto-generated method stub
+		System.out.println("inside reservation");
 		reservationRepository.save(reservation);
+		System.out.println("outside reservatiob");
 	}
 
 	@Override

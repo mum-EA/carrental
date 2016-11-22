@@ -27,8 +27,10 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import edu.mum.cs544.abccarrental.model.Roles;
 import edu.mum.cs544.abccarrental.model.Users;
+import edu.mum.cs544.abccarrental.model.Vehicle;
 import edu.mum.cs544.abccarrental.service.IRolesService;
 import edu.mum.cs544.abccarrental.service.IUsersService;
+import edu.mum.cs544.abccarrental.service.IVehicleService;
 
 @Controller
 public class MainController {
@@ -36,10 +38,15 @@ public class MainController {
 	IUsersService userService;
 	@Autowired
 	IRolesService roleService;
+	@Autowired
+	IVehicleService vehicleService;
 
+	
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		model.addAttribute("username", getPrincipal());
+		List<Vehicle> vehicles = vehicleService.findAllVehicle();
+		model.addAttribute("vehicles", vehicles );
 		return "home";
 	}
 
@@ -169,7 +176,7 @@ public class MainController {
 
 	}
 
-	private String getPrincipal() {
+	static String getPrincipal() {
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

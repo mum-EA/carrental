@@ -57,11 +57,8 @@ public class VehicleController {
 	@RequestMapping(value = "/admin/vehicles/vehicle", method = RequestMethod.POST)
 	public String createVehicle(Model model, @ModelAttribute("vehicle") Vehicle vehicle,  BindingResult bindingresult ,HttpServletRequest request,
             @RequestParam CommonsMultipartFile[] vehicleImage)throws IOException {	
-		System.out.println("£££££££££££££££££££££££££££££££££££££££££££££££££££££££££");
-		System.out.println("dontdont");
-		/*if(vehicle.getVehicleImage().length == 0){
-			vehicle.setVehicleImage(null);
-		}*/
+		
+	
 		 if (vehicleImage != null && vehicleImage.length > 0) {
 		        for (CommonsMultipartFile file : vehicleImage){
 		            System.out.println("File Name: " + file.getOriginalFilename());
@@ -69,24 +66,12 @@ public class VehicleController {
 		  }
 		 }
 		String myBase64 = new String(Base64.encodeBase64(vehicle.getVehicleImage()));
-		model.addAttribute("imageBase64", myBase64);
+		vehicle.setBase64imageFile(myBase64);
+		model.addAttribute(String.valueOf(vehicle.getPlateNumber()), myBase64);
 		vehicleService.saveVehicle(vehicle);
 		model.addAttribute("vehicles", vehicleService.findAllVehicle());
 		return "showvehicle";
 	}
-/*@RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
-public String upload(HttpServletRequest request,
-                            @RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
-    if (fileUpload != null && fileUpload.length > 0) {
-        for (CommonsMultipartFile file : fileUpload){
-            System.out.println("File Name: " + file.getOriginalFilename());
-            System.out.println("File Data: " + Arrays.toString( file.getBytes() ));
-        }
-    }
-    return "uploadCompleted";
-}  */
-	
-	
 	
 	@RequestMapping(value = "/image/{plateNumber}",method = RequestMethod.GET)
 	public void getImage(Model model , @PathVariable ("plateNumber") int plateNumber , HttpServletResponse response, HttpServletRequest request)throws

@@ -1,5 +1,6 @@
 package edu.mum.cs544.abccarrental.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +21,11 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Reservation {
+public class Reservation implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1000000000000675L;
 	@Id
 	@GeneratedValue
 	private int reservationId;
@@ -44,12 +50,13 @@ public class Reservation {
 	@Enumerated(EnumType.STRING)
 	private ReservationStatus status;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne
 	private Vehicle vehicle;
 	
 	
 	@OneToOne
-	private Customer customer;
+	@JoinColumn(name = "userId")
+	private Users user;
 
 	public int getReservationId() {
 		return reservationId;
@@ -116,12 +123,13 @@ public class Reservation {
 
 	}
 
-	public Customer getCustomer() {
-		return customer;
+
+	public Users getUser() {
+		return user;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	public double getTotalPrice() {

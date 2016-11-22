@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.cs544.abccarrental.model.Payment;
 import edu.mum.cs544.abccarrental.model.Reservation;
+import edu.mum.cs544.abccarrental.model.Users;
 import edu.mum.cs544.abccarrental.model.Vehicle;
 import edu.mum.cs544.abccarrental.service.IReservationService;
+import edu.mum.cs544.abccarrental.service.IUsersService;
 import edu.mum.cs544.abccarrental.service.IVehicleService;
 
 
@@ -29,6 +32,8 @@ public class ReservationController2 {
 	
 	@Autowired
 	IVehicleService vehicleService;
+	@Autowired
+	IUsersService userService;
 	
 	
 	@RequestMapping(value = "/rentReservation", method = RequestMethod.GET)
@@ -49,8 +54,11 @@ public class ReservationController2 {
 			return "addReservation2";
 		}
 		
-		
-		reservation.setVehicle((Vehicle)session.getAttribute("vehicle"));
+		Vehicle vehicle = (Vehicle)session.getAttribute("vehicle");
+		Vehicle vehicle2 = vehicleService.findOne(vehicle.getVehicleId());
+		reservation.setVehicle(vehicle2);
+		Users user = userService.findUserByUserName(MainController.getPrincipal());
+		reservation.setUser(user);
 		int daystotal = (int)((reservation.getReturnDate().getTime()-reservation.getPickupDate().getTime())/(1000 * 60 * 60 * 24));
 		 reservation.setTotalPrice(daystotal * reservation.getVehicle().getDailyPrice());
 		reservationService.add(reservation);

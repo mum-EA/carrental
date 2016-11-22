@@ -117,7 +117,7 @@ input[type=checkbox] {
 	width: 90% !important;
 }
 .footertext{
-	color: #fff;
+	color: #ddd;
 	font-weight: 700;
 	margin-bottom: 20px;
 }
@@ -153,4 +153,75 @@ input[type=checkbox] {
 }
 .form-control{
 	width: 60%;
+}
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 15px 10px;
+}
+.col-lg-4{
+	height: 140px;
+	width: 200px;
+}
+.categoryMarker{
+	margin-left: 15%;
+	margin-top: 20px;
+	margin-bottom: 100px;
+}
+.eachcategorymarker{
+	padding-left: 50px;
+	float: left;
+	height: 350px;
+	margin-bottom: 50px;
+}
+.frontp{
+	font-weight: 700;
+	color: #181918;
+}
+.frontinnerp{
+	
+}
+.img-circle{
+	clear: both;
+}
+html {
+    background: whitesmoke;
+}
+.footerarea2{
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.customerssay{
+.font-family: Georgia, serif;
+font-size: 18px;
+font-style: italic;
+width: 500px;
+margin: 0.25em 0;
+padding: 0.25em 40px;
+line-height: 1.45;
+position: relative;
+color: #383838;
+position: fixed;
+bottom: 50px;
+}
+customerssay cite {
+color: #999999;
+font-size: 14px;
+display: block;
+margin-top: 5px;
+}
+ 
+customerssay cite:before {
+content: "\2014 \2009";
+}
+
+customerssay:before {
+display: block;
+content: "\201C";
+font-size: 80px;
+position: absolute;
+left: -20px;
+top: -20px;
+color: #7a7a7a;
 }

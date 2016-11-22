@@ -1,5 +1,6 @@
 package edu.mum.cs544.abccarrental.model;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -14,17 +15,20 @@ import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
+import org.apache.tomcat.util.codec.binary.Base64;
+
 
 
  
 @Entity
-public class Vehicle {
+public class Vehicle implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1000000000000233L;
+
 	@Id
 	@GeneratedValue
 	
@@ -44,6 +48,8 @@ public class Vehicle {
 	
 	@Lob
 	private byte[] vehicleImage;
+	@Transient
+	private String base64imageFile;
 	
 	
 	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.US);
@@ -111,6 +117,16 @@ public class Vehicle {
 	}
 	public void setVehicleImage(byte[] vehicleImage) {
 		this.vehicleImage = vehicleImage;
+	}
+	public String getBase64imageFile() {
+		return new String(Base64.encodeBase64(this.getVehicleImage()));
+	}
+	public void setBase64imageFile(String base64imageFile) {
+		String myBase64 = new String(Base64.encodeBase64(this.getVehicleImage()));
+		this.base64imageFile = myBase64;
+	}
+	public void setManufacturedYear(Date manufacturedYear) {
+		this.manufacturedYear = manufacturedYear;
 	}
 	
 	
