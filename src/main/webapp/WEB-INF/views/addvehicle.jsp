@@ -10,7 +10,7 @@
 	<div>Add New Vehicle</div>
 
 	<div>
-		<form:form action="vehicle" method="POST" commandname = "vehicle">
+		<form:form action="vehicle" method="POST" commandName = "vehicle" enctype="multipart/form-data">
 
 			<table border=1>
 				<tr>
@@ -26,11 +26,13 @@
 				</tr>
 				<tr>
 					<th>Vehicle Type :</th>
-					<%-- <td><form:select path="vehicleType">
-						<form:options items="${vtype}" />
+					<td>
+					<form:select path="vehicleType">
+						<form:option value="" label="Select Vehicle Type" />
+						<form:options path="${availableOptions}" />
 					</form:select>
-					</td> --%>
-					<td><input type="text" placeholder="Vehicle Type" name="vehicleType"  /></td>
+				</td>
+					
 				</tr>
 
 				<tr>
@@ -45,7 +47,12 @@
 				</tr>
 				<tr>
 					<th>Status :</th>
-					<td><input type="text" placeholder="status" name="status" /></td>
+					<td>
+					<form:select path="status">
+						<form:option value="" label="Select Availabilty" />
+						<form:options path="${availableOptions}" />
+					</form:select>
+					
 				</tr>
 
 				<tr>
@@ -53,6 +60,19 @@
 					<td><input type="number" placeholder="daily price"
 						name="dailyPrice" /></td>
 				</tr>
+				<tr>
+						<td><label>Image:</label></td>
+						<td><input type="file" name="vehicleImage" required><br>
+						</td>
+						<td><label for="imgpreview"> Image preview:</label><img
+							src="#"  id="preview">
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+						</td>
+					</tr>
 
 				<tr>
 					<td><input type="submit" value="add" name="add" /></td>

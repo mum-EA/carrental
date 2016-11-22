@@ -10,8 +10,15 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 
  
@@ -20,7 +27,9 @@ public class Vehicle {
 	
 	@Id
 	@GeneratedValue
+	
 	private int vehicleId;
+	
 	private int plateNumber;
 	private int numberOfSeats;
 	@Enumerated(EnumType.STRING)
@@ -30,7 +39,12 @@ public class Vehicle {
 	
 	@Temporal(TemporalType.DATE)
 	private Date manufacturedYear;
-	private boolean status;
+	@Enumerated(EnumType.STRING)
+	private VehicleStatus status;
+	
+	@Lob
+	private byte[] vehicleImage;
+	
 	
 	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.US);
 	
@@ -86,12 +100,20 @@ public class Vehicle {
 			e.printStackTrace();
 		} 
 	}
-	public boolean isStatus() {
+	public VehicleStatus getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(VehicleStatus status) {
 		this.status = status;
 	}
+	public byte[] getVehicleImage() {
+		return vehicleImage;
+	}
+	public void setVehicleImage(byte[] vehicleImage) {
+		this.vehicleImage = vehicleImage;
+	}
+	
+	
 	
 	
 	

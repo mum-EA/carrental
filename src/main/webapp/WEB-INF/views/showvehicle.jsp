@@ -20,6 +20,7 @@
 					<th>Manufactured Year</th>
 					<th>Status</th>
 					<th>Daily Price</th>
+					<th> Image </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,6 +34,7 @@
 						<td> <c:out value="${vehicle.manufacturedYear}" /> </td>
 						<td> <c:out value="${vehicle.status}" /> </td>
 						<td> <c:out value="${vehicle.dailyPrice}" /> </td>
+						<td><img src="data:image/png;base64,${imageBase64}" width="150" height="100" /></td>
 						<td> <a href = " <c:url value='/editvehicle/${vehicle.vehicleId}' />" >Edit </a> </td>
 						<td> <a href="<c:url value='/remove/${vehicle.vehicleId}' />" >Delete </a> </td>
 					</tr>
