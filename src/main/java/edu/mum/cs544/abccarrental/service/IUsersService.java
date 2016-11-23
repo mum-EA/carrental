@@ -13,5 +13,6 @@ public interface IUsersService {
 	List<Users> findAllUsers();
 	Users findUserByUserName(String username);
 	void updateUser(Users user);
+	List<String> getListOfEmails();
 	
 }

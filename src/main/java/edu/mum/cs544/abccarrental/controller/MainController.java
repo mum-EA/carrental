@@ -29,6 +29,7 @@ import edu.mum.cs544.abccarrental.model.Roles;
 import edu.mum.cs544.abccarrental.model.Users;
 import edu.mum.cs544.abccarrental.model.Vehicle;
 import edu.mum.cs544.abccarrental.model.VehicleStatus;
+import edu.mum.cs544.abccarrental.service.IEmailService;
 import edu.mum.cs544.abccarrental.service.IRolesService;
 import edu.mum.cs544.abccarrental.service.IUsersService;
 import edu.mum.cs544.abccarrental.service.IVehicleService;
@@ -41,6 +42,8 @@ public class MainController {
 	IRolesService roleService;
 	@Autowired
 	IVehicleService vehicleService;
+	@Autowired
+	IEmailService emailService;
 
 	
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
@@ -143,7 +146,11 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/addnewcustomer", method = RequestMethod.POST)
-	public String processAdd(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult) {
+	public String processAdd(@ModelAttribute("user") @Valid Users user, BindingResult bindingResult, Model model) {
+		
+		//check if user already exists
+		
+		Users existingUser = userService.findUserByUserName(user.getUsername());
 		if (bindingResult.hasErrors()) {
 			return "registercustomer";
 		} else {
@@ -152,7 +159,7 @@ public class MainController {
 			System.out.println("Current user is: "+ username);
 			if (!username.equals("anonymousUser")) {
 				userService.updateUser(user);
-			} else {
+			} else if(existingUser == null) {
 				userService.save(user);
 				Roles role = new Roles();
 				if (user.getUsername().equalsIgnoreCase("Administrator")
@@ -163,6 +170,13 @@ public class MainController {
 				}
 				role.setUsername(user.getUsername());
 				roleService.Save(role);
+				
+				//send email to user up on registration
+				
+				emailService.sendThankYouForRegistrationEMail(user.getEmail(), user.getName());
+			} else{
+				model.addAttribute("useralreadyexists", "Username already taken");
+				return "registercustomer";
 			}
 			return "redirect:/home";
 		}

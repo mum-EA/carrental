@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -41,6 +42,7 @@ public class Reservation implements Serializable {
 	private Date reservationDate;
 	@NotNull
 	@NotEmpty(message="location to cannot be empty")
+	@Size(min = 5, max = 30, message = "Size must be between 5 and 30")
 	private String locationto;
 	@NotNull
 	@NotEmpty(message="location from cannot be empty")

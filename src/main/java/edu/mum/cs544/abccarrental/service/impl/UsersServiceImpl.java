@@ -58,6 +58,11 @@ public class UsersServiceImpl implements IUsersService {
 			userRepo.updateUser(userOld.getPassword(), user.getEmail(), user.getName(), user.getStreet(), user.getState(), user.getZip(), user.getCountry(), user.getUsername(), user.getCity());
 		}
 	}
+	@Override
+	public List<String> getListOfEmails() {
+
+		return userRepo.getListOfEmails();
+	}
 	
 	
 

@@ -63,13 +63,12 @@
 			<p><img class = "img-circle" src="data:image/png;charset=utf-8;base64,${vehicle.base64imageFile}" width="140" height="140" /></p>
 			</div>
 <%-- 			<p>Vehicle Id : ${vehicle.vehicleId }</p>
- --%>			<p class = "frontp">Vehicle Brand :  ${vehicle.brand }</p>
-			<p class = "frontp">Vehicle Daily Price : ${vehicle.dailyPrice } </p>
-			<p class = "frontp"> Manufactured year: ${vehicle.manufacturedYear }</p>
-			<p class = "frontp">Number of seats : ${vehicle.numberOfSeats }</p>
-			<p class = "frontp">Plate Number : ${vehicle.plateNumber }</p>
-			<p class = "frontp">Status : ${vehicle.status }</p> 
-			<p class = "frontp">Type of Vehicle :  ${ vehicle.vehicleType}</p>
+ --%>			<p class = "frontp"><spring:message code="Vehiclebrand" text="Brand"/>  ${vehicle.brand }</p>
+			<p class = "frontp"><spring:message code="Dailyprice" text="Daily price"/> ${vehicle.dailyPrice } </p>
+			<p class = "frontp"> <spring:message code="Manufacturedyear" text="Daily price"/> ${vehicle.manufacturedYear }</p>
+			<p class = "frontp"><spring:message code="Numberofseats" text="Daily price"/> ${vehicle.numberOfSeats }</p>
+			<p class = "frontp"><spring:message code="Platenumber" text="Daily price"/> ${vehicle.plateNumber }</p>
+			<p class = "frontp"><spring:message code="Vehicletype" text="Default vehicle test"/>  ${ vehicle.vehicleType}</p>
 
 			<p>
 				<c:if test="${vehicle.status == 'Available' }">

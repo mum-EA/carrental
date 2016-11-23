@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
@@ -37,12 +38,6 @@ public class VehicleController {
 	@Autowired
 	IVehicleService vehicleService;
 	
-	@Autowired
-	private ServletContext servletContext;
-
-	public void setServletContext(ServletContext servletContext) {
-		this.servletContext = servletContext;
-	}
 	
 	
 	@RequestMapping(value = "/admin/vehicles/addvehicle", method = RequestMethod.GET)
@@ -101,11 +96,26 @@ public class VehicleController {
 	}
 	
 	@RequestMapping(value="/updatevehicle", method=RequestMethod.POST )
-	public String updateVehicle(@ModelAttribute("Vehicle") Vehicle vehicle ,  Model model) {		
-		System.out.println("*******************************************************");
+	public String updateVehicle(@ModelAttribute("Vehicle") Vehicle vehicle ,  Model model, HttpServletRequest request,
+		 @RequestParam CommonsMultipartFile[] vehicleImage)throws IOException {	
+				
+			
+			
+			 if (vehicleImage != null && vehicleImage.length > 0) {
+			        for (CommonsMultipartFile file : vehicleImage){
+			            System.out.println("File Name: " + file.getOriginalFilename());
+			            System.out.println("File Data: " + Arrays.toString( file.getBytes() ));
+			  }
+			 }
+		 
+			String myBase64 = new String(Base64.encodeBase64(vehicle.getVehicleImage()));
+			vehicle.setBase64imageFile(myBase64);
+			model.addAttribute(String.valueOf(vehicle.getPlateNumber()), myBase64);
+		
+		
 		vehicleService.saveVehicle(vehicle);
 		 model.addAttribute("vehicles", vehicle);
-		return "redirect:/vehicle/showvehicle";
+		return "redirect:/admin/vehicles";
 	}
 	
 	@RequestMapping("/remove/{id}")
@@ -120,5 +130,10 @@ public class VehicleController {
 	public void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
 		// Convert multipart object to byte[]
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	}
+	//rest
+	@RequestMapping(value = "/admin/searchvehicle/{plateNumber}",method = RequestMethod.GET)
+	public @ResponseBody Vehicle restSearchCar(@PathVariable("plateNumber") int plateNumber){
+		return vehicleService.findByPlateNumber(plateNumber);
 	}
 }

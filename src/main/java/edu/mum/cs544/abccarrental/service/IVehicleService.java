@@ -13,6 +13,7 @@ public interface IVehicleService {
 	public Vehicle update(Vehicle vehicle);
 	public void delete(int id);
 	public List<Vehicle>findVehiclesByAvailability(VehicleStatus available);
+	public Vehicle findByPlateNumber(Integer plateNumber);
 	
 	
 }

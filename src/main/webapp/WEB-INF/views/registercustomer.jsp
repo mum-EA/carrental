@@ -36,6 +36,9 @@
 							<div class="has-error">
 								<form:errors path="username" class="help-inline" />
 							</div>
+							<div class="has-error">
+							<label class="help-inline"><c:out value="${useralreadyexists}"/></label>
+							</div>
 						</div>
 					</div>
 				</div>

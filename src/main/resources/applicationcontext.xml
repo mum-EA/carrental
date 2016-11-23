@@ -4,20 +4,30 @@
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" 
 	xsi:schemaLocation="http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.w3.org/2001/XMLSchema">
+		
 	<!-- bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
 		<property name="location" value="classpath:application.properties" /> </bean -->
 
 	<tx:annotation-driven />
+	<aop:aspectj-autoproxy />
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:application.properties" />
+		<property name="locations">
+			<list>
+				<value>classpath:application.properties</value>
+				<value>classpath:methodnamemappings.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
 
 	<!-- The jpa:repositories scans for all interfaces that extend JpaRepository 
@@ -76,4 +86,13 @@
 		DataAccessException hierarchy). -->
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- Custom beans -->
+	
+	
+	<bean id="userAspect" class="edu.mum.cs544.abccarrental.aop.UserAspect" autowire="byType">
+	</bean>
+	<bean id="methodNames" class="edu.mum.cs544.abccarrental.aop.MethodName"></bean>
+	
+	
 </beans>

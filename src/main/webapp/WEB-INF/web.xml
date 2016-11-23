@@ -19,12 +19,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-        		classpath:applicationcontext.xml,classpath:spring-security.xml
+        		classpath:applicationcontext.xml,classpath:spring-security.xml,classpath:emailconf.xml
          </param-value>
 	</context-param>
 	
-	
-
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -60,6 +58,10 @@
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
+        <init-param>  
+       <param-name>forceEncoding</param-name>  
+       <param-value>true</param-value>  
+    </init-param>
     </filter>
 
     <filter-mapping>

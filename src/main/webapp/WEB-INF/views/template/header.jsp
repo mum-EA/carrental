@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -17,11 +18,11 @@
 <title>ABC car rental company</title>
 
 <!-- Angular.JS -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script> -->
 
-<!-- JQuery -->
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> 
 <script
 	src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 
@@ -69,41 +70,46 @@
 						<div id="navbar" class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/allcustomers" />">Manage customers</a>
+										<a href="<c:url value="/allcustomers" />"><spring:message code="ManageCustomer" text="deafault text"/></a>
 									</sec:authorize></li>
-									<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/admin/vehicles/addvehicle" />">Add new vehicle</a>
-									</sec:authorize></li>
-								
 								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<a href="<c:url value="/admin/vehicles" />">Manage Vehicles</a>
+										<a href="<c:url value="/admin/vehicles/addvehicle" />"><spring:message code="AddNewVehicle" text="deafault text"/></a>
 									</sec:authorize></li>
-								
-								<li><sec:authorize access="hasAnyRole('ROLE_CUSTOMER')">
-										<a href="<c:url value="/myreservations" />">My
-											reservations</a>
+
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+										<a href="<c:url value="/admin/vehicles" />"><spring:message code="ManageVehicle" text="deafault text"/></a>
+									</sec:authorize></li>
+
+								<li><sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+										<a href="<c:url value="/customer/myreservations" />"><spring:message code="MyReservations" text="deafault text"/></a>
 									</sec:authorize></li>
 								<li><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
-										<a href="<c:url value="/customerdetail" />">Account
-											settings</a>
+										<a href="<c:url value="/customerdetail" />"><spring:message code="AccountSettings" text="deafault text"/></a>
 									</sec:authorize></li>
 								<li><sec:authorize
 										access="!hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
-										<a href="<c:url value="/login" />">Login</a>
+										<a href="<c:url value="/registernewcustomer" />"><spring:message code="Register" text="deafault text"/></a>
+									</sec:authorize></li>
+								<li><sec:authorize
+										access="!hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
+										<a href="<c:url value="/login" />"><spring:message code="Login" text="deafault text"/></a>
 									</sec:authorize></li>
 								<li><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
-										<a href="<c:url value="/logout" />">Logout</a>
+										<a href="<c:url value="/logout" />"><spring:message code="Logout" text="deafault text"/></a>
 									</sec:authorize></li>
 								<%-- <li><a href="<c:url value="/about" />">About Us</a></li>
 								<li><sec:authorize access="hasRole('ROLE_ADMIN')">
 										<p>If you are admin only</p>
 									</sec:authorize></li> --%>
-								<li class="welcometext"><sec:authorize
+								<li class="welcometext"><%-- <sec:authorize
 										access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER')">
-										Welcome: <strong>${username}</strong>
-									</sec:authorize></li>
+										<spring:message code="Welcome" text="deafault text"/> <strong>${username}</strong>
+									</sec:authorize> --%></li>
+								<li><a href="?language=en_US">English</a></li>
+								<li> <a
+									href="?language=es_ES">Spanish</a></li>
 							</ul>
 							<ul class="nav navbar-nav pull-right">
 

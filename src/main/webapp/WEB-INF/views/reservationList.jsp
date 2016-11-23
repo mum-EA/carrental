@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page isELIgnored="false"%>
+<%-- <%@ page isELIgnored="false"%> --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,7 +9,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Vehicle</title>
+<title>Reservation List</title>
 </head>
 <body>
 <div class="container">
@@ -38,24 +38,35 @@
 				<td>${reservation.locationfrom }</td>
 				<td>${reservation.locationto }</td>
 				
-				<%-- <td> <a href = " <c:url value='/editReservation/${reservation.reservationId}' />" >Edit12345 </a> </td> --%>
 				
-					<td> <a href = " <c:url value='/editReservation/${reservation.reservationId}' />" >Edit </a> </td>
-						<%-- <td> <a href="<c:url value='/removeReservation/${reservation.reservationId}' />" >Delete </a> </td> --%>
-						
+			<%-- 	
+				<td>
+					<form:form action="/editReservation/${reservation.reservationId}" method="GET">
+								<input type="submit" value="eeeeeeeeeeeee"/>
+							</form:form>
+				
+				</td> --%>
+				
+				<td> <a href = " <c:url value='/editReservation/${reservation.reservationId}' />" >Edit </a> </td>
+				
+				<%-- <td> <a href = " <c:url value='/editReservation/${reservation.reservationId}' />" >Edit </a> </td>
+				
+				
+				
+				<td> <a href = " <c:url value='/editReservation/${reservation.reservationId}' />" >Edit </a> </td> --%>
 						<td>
-							<form:form action="removeReservation/${reservation.reservationId}" method="GET">
+						<form:form action="removeReservation/${reservation.reservationId}" method="GET">
 								<input type="submit" value="Delete"/>
 							</form:form>
 						</td>
 		</tr>			
 		</c:forEach>
 	</table>
-	<form:form action="rentMore" method="POST"  cssClass="rentmore">
+	<%-- <form:form action="/ea/rentMore" method="POST"  cssClass="rentmore">
 			<input type="submit" class="btn btn-primary" value="Rent More..."/>
-		</form:form>
+		</form:form> --%>
 		
-	<a class = "makepayment" class="btn btn-primary" href='<c:url value = '/makePayment'  />'>Make Payment</a>
+	 <a class = "makepayment" class="btn btn-primary" href='<c:url value = '/makePayment'  />'>Make Payment</a> 
 	</div>
 </body>
 </html>

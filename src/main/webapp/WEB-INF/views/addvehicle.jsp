@@ -85,21 +85,20 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="form-group col-md-12">
 						<label class="col-md-3 control-lable">Daily Price :</label>
 						<div class="col-md-7">
 							<input type="number" placeholder="daily price" name="dailyPrice" class = "form-control input-sm"/>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label class="col-md-3 control-lable">Image:</label>
 						<div class="col-md-7">
-							<label>Image:</label> <input type="file" name="vehicleImage"
-								required> <label for="imgpreview"> Image
-								preview:</label><img src="#" id="preview">
+							 <input type="file" name="vehicleImage"
+								required/> 
 						</div>
 					</div>
 				</div>

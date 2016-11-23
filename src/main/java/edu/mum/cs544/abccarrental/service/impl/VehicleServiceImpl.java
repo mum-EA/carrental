@@ -58,6 +58,13 @@ public class VehicleServiceImpl implements IVehicleService {
 		return vehiclerepository.findVehiclesByAvailability(available);
 	}
 
+
+	@Override
+	public Vehicle findByPlateNumber(Integer plateNumber) {
+		// TODO Auto-generated method stub
+		return vehiclerepository.findByPlateNumber(plateNumber);
+	}
+
 	
 
 	

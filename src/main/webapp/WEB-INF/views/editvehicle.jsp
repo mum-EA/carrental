@@ -14,9 +14,10 @@
 <div class="generic-container">
 		<div class="well lead">Edit vehicle information</div>
 
+		<!-- /admin/vehicles/vehicle -->
+		 <form:form action="../updatevehicle" method="POST">
 		
-		<form:form action="../updatevehicle" method="POST">
-
+	<%-- <form:form action="vehicle" method="POST" commandName="vehicle"> --%>
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable">Plate Number: </label>
@@ -83,6 +84,17 @@
 					</div>
 				</div>
 			</div>
+			 <div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-3 control-lable">Image:</label>
+						<div class="col-md-7">
+							<label>Image:</label> <input type="file" name="vehicleImage"
+								required>
+								
+								<%-- <p><img class = "img-circle" src="data:image/png;charset=utf-8;base64,${vehicle.base64imageFile}" width="140" height="140" /></p> --%>
+						</div>
+					</div>
+				</div> 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 

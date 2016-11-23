@@ -34,16 +34,16 @@
 								<p>You have been logged out successfully.</p>
 							</div>
 						</c:if>
-						<div class="input-group input-sm">
+						<div class="input-group logintext">
 							<label class="input-group-addon" for="username"><i
 								class="fa fa-user"></i></label> <input type="text" class="form-control"
 								id="username" name="username" placeholder="Enter Username"
 								required>
 						</div>
-						<div class="input-group input-sm">
+						<div class="input-group logintext ">
 							<label class="input-group-addon" for="password"><i
 								class="fa fa-lock"></i></label> <input type="password"
-								class="form-control" id="password" name="password"
+								class="form-control " id="password" name="password"
 								placeholder="Enter Password" required>
 						</div>
 						
@@ -52,13 +52,13 @@
 
 						<div class="form-actions">
 							<input type="submit"
-								class="btn btn-block btn-primary btn-default" value="Log in">
+								class="btn btn-block btn-primary btn-default" value="<spring:message code="Login" text="deafault text"/>">
 						</div>
 						<div class="input-group input-sm">
 
 							<label for="remember-me" class="input-group-addon remembermelabel">Remember
-								Me</label> <input type="checkbox" id="remember-me" name="remember-me"
-								class="form-control" />
+								Me   <input type="checkbox" id="remember-me" name="remember-me"
+								class="form-control" /></label>
 						</div>
 					</form>
 					<spring:url value="/registernewcustomer" var="urlAddCustomer" />

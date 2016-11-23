@@ -2,6 +2,8 @@ package edu.mum.cs544.abccarrental.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,10 +32,10 @@ public class PaymentController {
 	
 	
 	@RequestMapping(value = "payment", method = RequestMethod.POST)
-	public String addPayment( Payment payment, BindingResult result, Model model){
-		/*if(result.hasErrors()){
+	public String addPayment( @Valid Payment payment, BindingResult result, Model model){
+		if(result.hasErrors()){
 			return "addPayment";
-		}*/
+		}
 		List<Reservation> revers = reservationService.getAll();
 		model.addAttribute("revers",revers);
 		paymentService.add(payment);

@@ -39,6 +39,8 @@ public class ReservationController2 {
 	
 	@RequestMapping(value = "/rentReservation", method = RequestMethod.GET)
 	public String addReservation( @RequestParam("id") int id, Model model, HttpSession session){
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------Add Reservation Page Open");
 		Reservation reservation = new Reservation();
 		Vehicle vehicle = vehicleService.findOne(id);
 		reservation.setVehicle(vehicle);
@@ -54,10 +56,11 @@ public class ReservationController2 {
 		if(result.hasErrors()){
 			return "addReservation2";
 		}
-		
-		Vehicle vehicle = (Vehicle)session.getAttribute("vehicle");
-		Vehicle vehicle2 = vehicleService.findOne(vehicle.getVehicleId());
-		reservation.setVehicle(vehicle2);
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------After Save Reservation Page");
+		reservation.setVehicle((Vehicle)session.getAttribute("vehicle"));
+		//Vehicle vehicle2 = vehicleService.findOne(vehicle.getVehicleId());
+		//reservation.setVehicle(vehicle2);
 		Users user = userService.findUserByUserName(MainController.getPrincipal());
 		reservation.setUser(user);
 		int daystotal = (int)((reservation.getReturnDate().getTime()-reservation.getPickupDate().getTime())/(1000 * 60 * 60 * 24));
@@ -69,9 +72,10 @@ public class ReservationController2 {
 		return "reservationList";
 	}
 	
-	@RequestMapping(value = "/myreservations")
+	@RequestMapping(value = "/customer/myreservations")
 	public String showMyReservations(Reservation reservation, Model model){
-		
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------Inside show my reservation");
 		String currentUser = MainController.getPrincipal();
 		int userId = userService.findUserByUserName(currentUser).getUserId();
 		List<Reservation>reservations = reservationService.getMyReservations(userId);
@@ -83,7 +87,9 @@ public class ReservationController2 {
 	}
 	
 	@RequestMapping(value="/cancelAddReservation", method=RequestMethod.GET )
-	public String cancelreservation(Model model) {		
+	public String cancelReservation(Model model) {
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------Cancel Reservation Page");
 		List<Vehicle> vehicles = vehicleService.findAllVehicle();
 		model.addAttribute("vehicles", vehicles );
 		return "vehicleList2";
@@ -92,7 +98,8 @@ public class ReservationController2 {
 	
 	@RequestMapping(value="/rentMore", method=RequestMethod.POST )
 	public String RentMore(Model model) {
-
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------After Save Reservation Page");
 		//TODO vehicles added by the user should not be displayed again
 		List<Vehicle> vehicles = vehicleService.findVehiclesByAvailability(VehicleStatus.Available);
 		model.addAttribute("vehicles", vehicles );
@@ -103,28 +110,36 @@ public class ReservationController2 {
 	
 	@RequestMapping(value="/editReservation/{id}", method=RequestMethod.GET)
 	public String openEditReservation( @PathVariable("id") int id, Model model) {
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------open edit Reservation Page");
 		Reservation reservation = reservationService.getById(id);
 		model.addAttribute("reservation", reservation);
 		return "editReservation2";
 	}
 	
 
-	@RequestMapping(value="/editReservation/updateReservation", method=RequestMethod.POST )
-	public String updateVehicle( @Valid Reservation reservation, Model model) {		
-		/*if(result.hasErrors()){
+	@RequestMapping(value="/updateReservation", method=RequestMethod.POST )
+	public String updateReservation( @Valid Reservation reservation, BindingResult result, Model model, HttpSession session) {		
+		if(result.hasErrors()){
 			return "editReservation2";
-		}*/
+		}
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------After update Reservation Page");
+		reservation.setVehicle((Vehicle)session.getAttribute("vehicle"));
+		reservationService.add(reservation);
 		List<Vehicle> vehicles = vehicleService.findAllVehicle();
 		model.addAttribute("vehicles", vehicles );
 		model.addAttribute("reservations", reservationService.getAll());
 		//return "redirect:/reservations/vehicleList2";
-		return "vehicleList2";
+		return "reservationList";
 	}
 	
 
 	@RequestMapping(value = "/removeReservation/{id}", method = RequestMethod.GET)
-    public String removePerson(@PathVariable("id") int id, Model model){
-        reservationService.delete(id);
+    public String removeReservation(@PathVariable("id") int id, Model model){
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------Remove Reservation Page");
+		reservationService.delete(id);
         model.addAttribute("reservations", reservationService.getAll());
 		List<Vehicle> vehicles = vehicleService.findAllVehicle();
 		model.addAttribute("vehicles", vehicles );
@@ -134,6 +149,8 @@ public class ReservationController2 {
 		
 	@RequestMapping(value="/makePayment", method=RequestMethod.GET)
 	public String makePayment(Model model, HttpSession session){
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("------------------Open Add Payment Page");
 		if(reservationService.getAll().isEmpty()){
 			int errorMessage = 0;
 			model.addAttribute("errorMessage", errorMessage);

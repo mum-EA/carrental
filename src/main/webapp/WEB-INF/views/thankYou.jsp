@@ -15,19 +15,34 @@
 	<h1>Thank you for your Reservation.</h1>
 	----------------------------------
 	
-	<c:forEach items="${revers }" var="a">
+	
+			
+			
+			
+			<table class="table table-hover">
+		<tr>
+			<th>ReservationId</th>
+			<th>VehicleId</th>
+			<th>Total Price</th>
+			<th>pick Up date</th>
+			<th>return date</th>
+			<th>From</th>
+			<th>To</th>
+			<th></th>
+			<th></th>
+		</tr>
+	<c:forEach items="${revers }" var="reservation">
 			<tr>
-				<td>${a.reservationId}</td>
-				<td>${a.vehicle.vehicleId}</td>				
-				<td>${a.totalPrice}</td>
-				<td>${a.pickupDate}</td>
-				<td>${a.returnDate }</td>
-				<td>${a.locationfrom }</td>
-				<td>${a.locationto }</td>
-				<td>${a.vehicle.vehicleId }</td>	
-				<td>------------------------</td>
-				</tr>
+				<td>${reservation.reservationId}</td>
+				<td>${reservation.vehicle.vehicleId}</td>				
+				<td>${reservation.totalPrice}</td>
+				<td>${reservation.pickupDate}</td>
+				<td>${reservation.returnDate }</td>
+				<td>${reservation.locationfrom }</td>
+				<td>${reservation.locationto }</td>
+		</tr>			
 		</c:forEach>
+			
 
 </body>
 </html>

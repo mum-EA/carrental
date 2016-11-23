@@ -99,13 +99,13 @@ public class Vehicle implements Serializable{
 	public Date getManufacturedYear() {
 		return manufacturedYear;
 	}
-	public void setManufacturedYear(String manufacturedYear) {
-		try {
-			this.manufacturedYear =  df.parse(manufacturedYear);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} 
-	}
+//	public void setManufacturedYear(String manufacturedYear) {
+//		try {
+//			this.manufacturedYear =  df.parse(manufacturedYear);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		} 
+//	}
 	public VehicleStatus getStatus() {
 		return status;
 	}

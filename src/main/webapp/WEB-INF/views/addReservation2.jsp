@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page isELIgnored="false"%>
+<%-- <%@ page isELIgnored="false"%> --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -61,17 +61,17 @@
 				<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 
-					<input type="submit" value="Reserve" name="add" class="btn btn-primary"//>
+					<input type="submit" value="Add" name="add" class="btn btn-primary"/>
 				</div>
 			</div>
 		</form:form>
 		
-		</br>
+		<br/>
 		<form:form action="cancelAddReservation" method="GET">
 		<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 
-					<input type="submit" value="Cancel" name="cancel" class="btn btn-primary"//>
+					<input type="submit" value="Cancel" name="cancel" class="btn btn-primary"/>
 				</div>
 			</div>
 		</form:form>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page isELIgnored="false"%>
+<%-- <%@ page isELIgnored="false"%> --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,69 +8,78 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Vehicle</title>
+<title>Add Payment</title>
 </head>
+
 <body>
-<form:form method="post" modelAttribute="payment" action="payment">
 
+<div class="generic-container">
 
-			<div class="row">
-					<div class="form-group col-md-12">
-						<label class="col-md-3 control-lable" >Select Payment Type :</label>
-						<div class="col-md-7">
-							<form:select id="paymentType" path="paymentType">
+		<div class="well lead">Make payment</div>
+	<form:form method="post" modelAttribute="payment" action="payment">
+	
+	Language : <a href="?language=en_US">English</a>
+		<a href="?language=es_ES">Spanish</a>
+		<br>
+		<br>
+
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-lable"><spring:message code="SelectPaymentType" text="deafault text"/></label>
+				<div class="col-md-7">
+					<form:select id="paymentType" path="paymentType">
 						<form:option value="creditCard" label="CREDIT CARD" />
 						<form:option value="visaCard" label="VISA CARD" />
 					</form:select>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12">
-						<label class="col-md-3 control-lable" >Card Number :</label>
-						<div class="col-md-7">
-							<form:input type="text" path="cardNumber" />
-							<form:errors path="cardNumber" cssStyle="color : red;" />
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12">
-						<label class="col-md-3 control-lable" >CCV :</label>
-						<div class="col-md-7">
-							<form:input type="text" path="ccv" />
-							<form:errors path="ccv" cssStyle="color : red;" />
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="form-group col-md-12">
-						<label class="col-md-3 control-lable" >Card expire date :</label>
-						<div class="col-md-7">
-							<form:input type="text" path="cardExpiryDate" />
-							<form:errors path="cardExpiryDate" cssStyle="color : red;" />
-						</div>
-					</div>
-				</div>
-				
-				<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" value="Make Payment" name="add" />
 				</div>
 			</div>
-		</form:form>
-		
-		<form:form method="post" modelAttribute="payment"
-		action="cancelpayments">
-		
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-lable"><spring:message code="CardNumber" text="deafault text"/></label>
+				<div class="col-md-7">
+					<form:input type="text" path="cardNumber" />
+					<form:errors path="cardNumber" cssStyle="color : red;" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-lable"><spring:message code="CCV" text="deafault text"/></label>
+				<div class="col-md-7">
+					<form:input type="text" path="ccv" />
+					<form:errors path="ccv" cssStyle="color : red;" />
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3 control-lable"><spring:message code="CardExpireDate" text="deafault text"/></label>
+				<div class="col-md-7">
+					<form:input type="text" path="cardExpiryDate" />
+					<form:errors path="cardExpiryDate" cssStyle="color : red;" />
+				</div>
+			</div>
+		</div>
+
 		<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" value="Cancel" name="add" />
-				</div>
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" value="Make Payment" name="add" />
 			</div>
+		</div>
+	</form:form>
+
+	<form:form method="post" modelAttribute="payment"
+		action="cancelpayments">
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<input type="submit" value="Cancel" name="add" />
+			</div>
+		</div>
 	</form:form>
 
 
@@ -140,6 +149,6 @@
 		action="cancelpayments">
 		<button>Cancel</button>
 	</form:form> --%>
-
+</div>
 </body>
 </html>

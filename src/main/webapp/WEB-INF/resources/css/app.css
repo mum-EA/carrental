@@ -243,3 +243,16 @@ color: #7a7a7a;
     margin-right: 50px;
     font-weight: 900;
 }
+.logintext{
+	padding-top: 18px;
+}
+#searchText{
+	margin-left: 109px;
+}
+#div1{
+	margin-left: 109px;
+}
+#remember-me{
+	height: 20px;
+	width: 20px;
+}
